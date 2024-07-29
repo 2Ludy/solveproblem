@@ -11,8 +11,17 @@ public class Main_2444 {
 			for(int j=1; j<=Math.abs(N-i); j++) {    // 공백이 4,3,2,1,0,1,2,3,4 니까 math.abs(N-i)
 				System.out.print(" ");
 			}
-			for(int j=Math.abs(N-i)+1; j<2*N-Math.abs(N-i); j++) { // 별찍기 해당 위치부터 1 3 5 7 9 7 5 3 1 니까 2N-1-|N-i|
+//			for(int j=Math.abs(N-i)+1; j<2*N-Math.abs(N-i); j++) { // 별찍기 해당 위치부터 1 3 5 7 9 7 5 3 1 니까 2N-1-2|N-i|
+//				System.out.print("*");
+//			}
+			for(int j=1; j<=2*(N-Math.abs(N-i))-1; j++) {
 				System.out.print("*");
+			}
+//			for(int j=2*N-Math.abs(N-i); j<2*N; j++) {
+//				System.out.print(" ");
+//			}
+			for(int j=1; j<=Math.abs(N-i); j++) { 
+				System.out.print(" ");
 			}
 			System.out.println();
 		}
