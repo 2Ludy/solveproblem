@@ -2,9 +2,6 @@ package baekjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
 import java.util.StringTokenizer;
 
 public class Main_10163 {
@@ -26,8 +23,8 @@ public class Main_10163 {
 		
 		maps = new int[1001][1001];
 		for(int i=0; i<N; i++) {
-			for(int r=nums[i][0]; r<= nums[i][2] - nums[i][0]-1; r++) {
-				for(int c=nums[i][1]; c<= nums[i][3] - nums[i][1]-1; c++) {
+			for(int r=nums[i][0]; r<= nums[i][2] + nums[i][0]-1; r++) {
+				for(int c=nums[i][1]; c<= nums[i][3] + nums[i][1]-1; c++) {
 					maps[r][c] = i+1;
 				}
 			} 
