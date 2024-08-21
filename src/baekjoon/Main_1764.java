@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.StringTokenizer;
 
-public class Main_1764 {
+public class Main_1764 { 
 	
 	static int N, M,count;
 	static String s;
