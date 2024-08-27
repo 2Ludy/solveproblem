@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-public class Main_15649 {
+public class Main_15650 {
 	
 	static int N, M;
 	static StringBuilder sb;
 	static int[] p;
-	static boolean[] visited;
 	
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -18,14 +17,13 @@ public class Main_15649 {
 		M = Integer.parseInt(st.nextToken());
 	
 		p = new int[M];
-		visited = new boolean[N];
 		sb = new StringBuilder();
-		nPr(0);
+		nCr(0, 0);
 		System.out.println(sb);
 	}
 
-	static void nPr(int cnt) {
-		if(cnt == M) {
+	static void nCr(int idx, int cnt) {
+		if(idx == M) {
 			for(int num : p) {
 				sb.append(num).append(" ");
 			}
@@ -33,14 +31,10 @@ public class Main_15649 {
 			return;
 		}
 		
-		for(int i=0; i<N; i++) {
-			if(visited[i]) continue;
-			visited[i] = true;
-			p[cnt] = i+1;
-			nPr(cnt+1);
-			p[cnt] = 0;
-			visited[i] = false;
+		for(int i=cnt; i<N; i++) {
+			p[idx] = i+1;
+			nCr(idx+1, i+1);
+			p[idx] = 0;
 		}
 	}
-
 }
