@@ -5,16 +5,31 @@ import java.io.InputStreamReader;
 
 public class Main_2839 {
 	
-	static int N;
+	static int N, limited, min;
 	
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		N = Integer.parseInt(br.readLine());
+		limited = N/3 + 1;
+		min = limited;
 		
-		// N/5 를 한다음에 N%5가 있을거 아니야?
-		// N%5 를 3으로 나누는거지 근데 3으로 나눠서 나머지가 0이면
-		// 정답이고 나머지가 0이 아니면 while 문 돌려서 N%5한 값에 5씩 더하는거지
-		// 그다음에 계속 나머지가 0일떄까지 나누다가 5를 계속 더한 값이 N 초과하면 멈추기
+		logic(0, N);
+		if(min == limited) min = -1; 
+		System.out.println(min);
+	}
+
+	static void logic(int cnt, int n) {
+		if(cnt >= min || n<0) return;
+		if(n == 0) {
+			min = Math.min(min, cnt);
+			return;
+		}
+		if(n<=30) {
+			logic(cnt+1, n-5);
+			logic(cnt+1, n-3);
+		}else {
+			logic(cnt+(n-15)/5, (n-15)%5+15);
+		}
 		
 	}
 }
