@@ -91,7 +91,6 @@ public class Main_17471 {
 		subset(cnt+1);
 		visited[cnt] = false;
 		subset(cnt+1);
-		
 	}
 
 	static boolean bfs(int[] A, int[] B) {
