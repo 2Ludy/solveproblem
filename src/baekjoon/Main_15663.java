@@ -3,13 +3,14 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main_15663 {
 	
-	static int N, M;
+	static int N, M, idx;
 	static StringBuilder sb;
 	static int[] p, nums, postP;
 	static boolean[] visited;
@@ -25,21 +26,16 @@ public class Main_15663 {
 		for(int i=0; i<N; i++) {
 			nums[i] = Integer.parseInt(st.nextToken());
 		}
+		idx = 0;
 		
 		Arrays.sort(nums);
 		p = new int[M];
-		visited = new boolean[N];
 		set = new HashSet<>();
+		visited = new boolean[N];
 		sb = new StringBuilder();
 		
 		nPr(0);
 		
-		String[] strs = set.toArray(new String[0]);
-		Arrays.sort(strs);
-		
-		for(String s: strs) {
-			sb.append(s).append("\n");
-		}
 		System.out.println(sb);
 	}
 
@@ -47,9 +43,8 @@ public class Main_15663 {
 		if(cnt == M) {
 			String s = "";
 			for(int num: p) {
-				s += nums+" ";
+				s += num+" ";
 			}
-			set.add(s);
 			return;
 		}
 		
@@ -62,5 +57,4 @@ public class Main_15663 {
 			visited[i] = false;
 		}
 	}
-
 }
