@@ -10,7 +10,7 @@ public class Main_2644 {
 	
 	static int N, p1, p2, M, count;
 	static int[][] family;
-	static boolean[] visited;  
+	static int[] visited;  
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -29,27 +29,20 @@ public class Main_2644 {
 			family[num2][num1] = 1;
 		}
 		
-		count = 1;
-		
-		visited = new boolean[N];
+		visited = new int[N];
 		Queue<Integer> que = new LinkedList<>();
 		que.offer(p1);
-		visited[p1] = true;
+		visited[p1] = 1;
 		while(!que.isEmpty()) {
 			int s = que.poll();
 			for(int e=0; e<N; e++) {
-				if(visited[e]) continue;
+				if(visited[e] != 0) continue;
 				if(e == p1) continue;
 				if(family[s][e] == 0) continue;
-				visited[e] = true;
-				if(visited[p2]) {
-					System.out.println(count);
-					return;
-				}
+				visited[e] = visited[s]+1;
 				que.offer(e);
 			}
-			count++;
 		}
-		System.out.println(-1);
+		System.out.println(visited[p2]-1);
 	}
 }
