@@ -37,7 +37,6 @@ public class Main_2644 {
 			int s = que.poll();
 			for(int e=0; e<N; e++) {
 				if(visited[e] != 0) continue;
-				if(e == p1) continue;
 				if(family[s][e] == 0) continue;
 				visited[e] = visited[s]+1;
 				que.offer(e);
