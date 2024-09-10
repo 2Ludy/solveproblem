@@ -42,15 +42,13 @@ public class Main_14567 {
 		StringBuilder sb = new StringBuilder();
 		ans = new ArrayList<>();
 		
-		while(time!=N+1) {
+		a : while(true) {
 			for(int i=0; i<N; i++) {
 				if(!visited[i] && list[i].size() == 0) que.offer(i);
 			}
-			
+			if(que.isEmpty()) break a;
 			while(!que.isEmpty()) {
 				int num = que.poll();
-				if(visited[num]) continue;
-				if(list[num].size() != 0) continue;
 				for(int i=0; i<N; i++) {
 					for(int j=0; j<list[i].size(); j++) {
 						if(list[i].get(j) == num) list[i].remove(j);
