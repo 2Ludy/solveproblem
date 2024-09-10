@@ -5,6 +5,7 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.StringTokenizer;
 
@@ -14,7 +15,6 @@ public class Main_15663 {
 	static StringBuilder sb;
 	static int[] p, nums, postP;
 	static boolean[] visited;
-	static Set<String> set;
 	
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -30,7 +30,6 @@ public class Main_15663 {
 		
 		Arrays.sort(nums);
 		p = new int[M];
-		set = new HashSet<>();
 		visited = new boolean[N];
 		sb = new StringBuilder();
 		
@@ -41,10 +40,7 @@ public class Main_15663 {
 
 	static void nPr(int cnt) {
 		if(cnt == M) {
-			String s = "";
-			for(int num: p) {
-				s += num+" ";
-			}
+			
 			return;
 		}
 		
