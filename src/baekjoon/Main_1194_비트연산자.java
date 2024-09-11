@@ -102,7 +102,7 @@ public class Main_1194_비트연산자 {
 					que.offer(new int[] {nr, nc, newCurrent , time+1});
 					
 				}else if (map[nr][nc] == 'A') {
-					if((current & 1<<0) == current) {
+					if((current & 1<<0) == 1<<0) {
 						if(visited[nr][nc][current]) continue;
 						visited[nr][nc][current] = true;
 						que.offer(new int[] {nr, nc, current, time+1});
@@ -111,7 +111,7 @@ public class Main_1194_비트연산자 {
 					}
 					
 				}else if (map[nr][nc] == 'B') {
-					if((current | 1<<1) == current) {
+					if((current & 1<<1) == 1<<1 ) {
 						if(visited[nr][nc][current]) continue;
 						visited[nr][nc][current] = true;
 						que.offer(new int[] {nr, nc, current, time+1});
@@ -120,7 +120,7 @@ public class Main_1194_비트연산자 {
 					}
 					
 				}else if (map[nr][nc] == 'C') {
-					if((current | 1<<2) == current) {
+					if((current & 1<<2) == 1<<2 ) {
 						if(visited[nr][nc][current]) continue;
 						visited[nr][nc][current] = true;
 						que.offer(new int[] {nr, nc, current, time+1});
@@ -129,7 +129,7 @@ public class Main_1194_비트연산자 {
 					}
 					
 				}else if (map[nr][nc] == 'D') {
-					if((current | 1<<3) == current) {
+					if((current & 1<<3) == 1<<3 ) {
 						if(visited[nr][nc][current]) continue;
 						visited[nr][nc][current] = true;
 						que.offer(new int[] {nr, nc, current, time+1});
@@ -138,7 +138,7 @@ public class Main_1194_비트연산자 {
 					}
 					
 				}else if (map[nr][nc] == 'E') {
-					if((current | 1<<4) == current) {
+					if((current & 1<<4) == 1<<4 ) {
 						if(visited[nr][nc][current]) continue;
 						visited[nr][nc][current] = true;
 						que.offer(new int[] {nr, nc, current, time+1});
@@ -147,7 +147,7 @@ public class Main_1194_비트연산자 {
 					}
 					
 				}else if (map[nr][nc] == 'F') {
-					if((current | 1<<5) == current) {
+					if((current & 1<<5) == 1<<5 ) {
 						if(visited[nr][nc][current]) continue;
 						visited[nr][nc][current] = true;
 						que.offer(new int[] {nr, nc, current, time+1});
