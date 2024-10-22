@@ -3,18 +3,17 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.Comparator;
 import java.util.PriorityQueue;
-import java.util.Set;
 import java.util.StringTokenizer;
 
 public class Main_15663 {
 	
 	static int N, M, idx;
 	static StringBuilder sb;
-	static int[] p, nums, postP;
+	static int[] p, nums;
 	static boolean[] visited;
+	static PriorityQueue<int[]> pq;
 	
 	public static void main(String[] args) throws Exception{
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -31,16 +30,39 @@ public class Main_15663 {
 		Arrays.sort(nums);
 		p = new int[M];
 		visited = new boolean[N];
+		pq = new PriorityQueue<>(new Comparator<int[]>() {
+
+			@Override
+			public int compare(int[] o1, int[] o2) {
+				for(int i=0; i<M; i++) {
+					if(o1[i] == o2[i])continue;
+					return o1[i]-o2[i];
+				}
+				return 0;
+			}
+		});
 		sb = new StringBuilder();
 		
 		nPr(0);
 		
-		System.out.println(sb);
+		int[] past = new int[M];
+		while(!pq.isEmpty()) {
+			int[] nums = pq.poll();
+			if(!Arrays.equals(past, nums)) {
+				for(int num : nums) {
+					sb.append(num).append(" ");
+				}
+				sb.append("\n");
+				past = nums;
+			}
+		}
+		
+		System.out.print(sb);
 	}
 
 	static void nPr(int cnt) {
 		if(cnt == M) {
-			
+			pq.offer(p.clone());
 			return;
 		}
 		
@@ -49,7 +71,6 @@ public class Main_15663 {
 			visited[i] = true;
 			p[cnt] = nums[i];
 			nPr(cnt+1);
-			p[cnt] = 0;
 			visited[i] = false;
 		}
 	}
