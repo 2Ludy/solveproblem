@@ -2,10 +2,6 @@ package baekjoon;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
 import java.util.StringTokenizer;
 
 public class Main_14503 {
@@ -38,7 +34,7 @@ public class Main_14503 {
 		count = 0;
 		while(true) {
 			if(map[sr][sc] == 0) {
-				map[sr][sc] = 1;
+				map[sr][sc] = 2;
 				count++;
 			}else {
 				int clean = 0;
@@ -50,7 +46,7 @@ public class Main_14503 {
 				if(clean == 0) {
 					int nr = sr+dr[(d+2)%4];
 					int nc = sc+dc[(d+2)%4];
-					if(map[nr][nc] == 0) {
+					if(map[nr][nc] != 1) {
 						sr = nr;
 						sc = nc;
 					}else {
