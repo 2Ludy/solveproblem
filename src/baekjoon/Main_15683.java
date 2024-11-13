@@ -3,7 +3,6 @@ package baekjoon;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -14,6 +13,7 @@ public class Main_15683 {
 	static int count, size;
 	static List<int[]> is5;
 	static List<int[]> list;
+	static List<int[]>[] recovery;
 	static int[] dr = {-1, 1, 0, 0};
 	static int[] dc = {0, 0, -1, 1};
 	static int[] p;
@@ -55,15 +55,185 @@ public class Main_15683 {
 			}
 		}
 		
-		size = list.size();
-		p = new int[size];
-		nCs(0,0);
+		recovery = new ArrayList[list.size()];
+		for(int i=0; i<list.size(); i++) {
+			recovery[i] = new ArrayList<>();
+		}
+		min = count;
+		logic(0, count);
+		System.out.println(min);
 	}
 
-	private static void nCs(int idx, int cnt) {
+	private static void logic(int idx, int tmp) {
+		if(idx == list.size()) {
+			min = Math.min(tmp, min);
+			return;
+		}
 		
+		int[] nums = list.get(idx);
+		int r = nums[0];
+		int c = nums[1];
+		int value = map[r][c];
+		int newTmp = 0;
+		
+		if(value == 1) {
+			newTmp = logic1(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic2(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic3(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic4(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+		}else if(value == 2) {
+			
+			newTmp = logic1(r,c,idx);
+			newTmp += logic2(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic3(r,c,idx);
+			newTmp += logic4(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+		}else if(value == 3) {
+			newTmp = logic1(r,c,idx);
+			newTmp += logic3(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic1(r,c,idx);
+			newTmp += logic4(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic2(r,c,idx);
+			newTmp += logic4(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic2(r,c,idx);
+			newTmp += logic3(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+		}else if(value == 4) {
+			newTmp = logic1(r,c,idx);
+			newTmp += logic2(r,c,idx);
+			newTmp += logic3(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic2(r,c,idx);
+			newTmp += logic3(r,c,idx);
+			newTmp += logic4(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			
+			recovery(idx);
+			
+			newTmp = logic3(r,c,idx);
+			newTmp += logic4(r,c,idx);
+			newTmp += logic1(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+			
+			newTmp = logic4(r,c,idx);
+			newTmp += logic1(r,c,idx);
+			newTmp += logic2(r,c,idx);
+			logic(idx+1, tmp-newTmp);
+			newTmp=0;
+			recovery(idx);
+		}
 		
 	}
+	
+	private static int logic1(int r, int c, int idx) { // 오른쪽 방향
+		int num = 0;
+		for(int j=c+1; j<M; j++) {
+			if(map[r][j] == 0) {
+				map[r][j] = 7;
+				num++;
+				recovery[idx].add(new int[] {r,j});
+			}else if(map[r][j] == 6) {
+				break;
+			}
+		}
+		return num;
+	}
+	
+	private static int logic2(int r, int c, int idx) { // 왼쪽 방향
+		int num = 0;
+		for(int j=c-1; j>=0; j--) {
+			if(map[r][j] == 0) {
+				map[r][j] = 7;
+				num++;
+				recovery[idx].add(new int[] {r,j});
+			}else if(map[r][j] == 6) {
+				break;
+			}
+		}
+		return num;
+	}
+	
+	private static int logic3(int r, int c, int idx) { // 위쪽 방향
+		int num = 0;
+		for(int i=r-1; i>=0; i--) {
+			if(map[i][c] == 0) {
+				map[i][c] = 7;
+				num++;
+				recovery[idx].add(new int[] {i, c});
+			}else if(map[i][c] == 6) {
+				break;
+			}
+		}
+		return num;
+	}
+	
+	private static int logic4(int r, int c, int idx) { // 아래쪽 방향
+		int num = 0;
+		for(int i=r+1; i<N; i++) {
+			if(map[i][c] == 0) {
+				map[i][c] = 7;
+				num++;
+				recovery[idx].add(new int[] {i, c});
+			}else if(map[i][c] == 6) {
+				break;
+			}
+		}
+		return num;
+	}
+	
+	private static void recovery(int idx) { 
+		for(int[] nums : recovery[idx]) {
+			int r = nums[0];
+			int c = nums[1];
+			map[r][c] = 0;
+		}
+		recovery[idx].clear();
+	}
+	
+
 
 	private static void direction1(int r, int c) { // 오른쪽 방향
 		for(int j=c+1; j<M; j++) {
